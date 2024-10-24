@@ -1,10 +1,10 @@
 
 /**
- * @param {number} N
- * @param {number} K
- * @param {number} M
- * @param {number[]} S
- * @return {number}
+ * @param {number} N Number of seats available
+ * @param {number} K Social distance factor
+ * @param {number} M Number of seats taken
+ * @param {number[]} S Array with index(es) of seat(s) taken
+ * @return {number} Available spaces for new diners
  */
 function getMaxAdditionalDinersCount(N, K, M, S) {
     S.sort((a, b) => {
