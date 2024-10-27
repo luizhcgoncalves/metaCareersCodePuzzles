@@ -1,5 +1,5 @@
 /**
- * Each problem fromm the exam can award 1 or 2 points 
+ * Each problem from the exam can award 1 or 2 points 
  *                                                                                  Constraints
  * @param {number} N Amount of competitors                                          1 <= N <= 500,000
  * @param {number[]} S Sum of the point values of all problems they have solved     1 <= Si <= 1,000,000,000
@@ -34,9 +34,8 @@ function getMinProblemCount(N, S) {
     let leastAmount = 
         maximum % 2 === 0 // Check if maximum is divisible by 2
         ? maximum / 2 // Situation 1
-        : ((maximum - 1) / 2) + 1;  // Situation 2. [...] So one is substracted from the 
-                                    // maximum, and the result if divided by 2. That one 
-                                    // that was substracted gets added again in the end
+        : ((maximum + 1) / 2);      // Situation 2. [...] So one is added to  the 
+                                    // maximum, and the result if divided by 2.
 
     // The problem is when the maximum is divisible by 2, but there are odd numbers
     // in the set. Then you need to add another question to be an 1-point question
@@ -45,6 +44,13 @@ function getMinProblemCount(N, S) {
     if (oddNumbers && maximum % 2 === 0) {
         leastAmount++;
     }
+
+    // Notice the amount of 1s and 2s is irrelevant. There will never be more than
+    // two 1s, because otherwise that would not be optimal. So for that Si = 999,999,999
+    // You would need the same as you would if Si = 999,999,998, and another 1-point
+    // problem. If there are more than 2 odd numbers in the set, then one of those
+    // 2=point questions is actually an 1-point question, but the amount of each is
+    // not important for the problem anyway, it was just showing an example of a result set.
 
     return leastAmount;
 }
@@ -55,7 +61,7 @@ console.log(getMinProblemCount(4, [2, 4, 5, 8])); // 5
 console.log(getMinProblemCount(4, [2, 4, 1000000000, 8])); // 500,000,000
 console.log(getMinProblemCount(4, [2, 4, 1, 8])); // 5
 console.log(getMinProblemCount(2, [1, 2])); // 2
-console.log(getMinProblemCount(3, [1, 2, 1000000000])) // 500,000,001
+console.log(getMinProblemCount(3, [1, 2, 999999999])) // 500,000,000d
 console.log(getMinProblemCount(4, [1, 1, 1, 1])) // 1
 console.log(getMinProblemCount(4, [2, 2, 2, 2])) // 1
 console.log(getMinProblemCount(4, [2, 2, 1, 2])) // 2
